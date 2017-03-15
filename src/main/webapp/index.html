@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="application/json; charset=UTF-8">
+    </head>
+    <body>
+        <div id = "divId">
+            
+        </div>
+        <form id="form1">
+            <input type="text" id="quote" value="" />
+
+            <input type="submit" value="Submit" id="SubmitBtn"/>
+        </form>
+        <script>
+             var button = document.getElementById("SubmitBtn");
+            button.onclick = function () {
+                //alert("test");
+                submit();
+            };
+
+            var quoteInput = document.getElementById("quote");
+            submit = function () {
+
+                var quoteText = quoteInput.value;
+                 var promise = fetch("api/quote", {
+                    method: 'post',
+                    body: JSON.stringify({
+                        quote: quoteText
+
+                    })
+                });
+                promise.then(function (response) {
+                    //console.log(response);
+                    return response.text();
+                }).then(function (text) {
+                    alert(text);
+                });
+                return false;
+            };
+            
+//             var url = "http://localhost:8084/Week6Opgave1-1Again/api/quote";
+//
+//
+//                var conf = {method: 'get'};
+//            setInterval(function () {
+//                var promise = fetch(url, conf);
+//                promise.then(function (response) {
+//                    return response.text();
+//                }).then(function (text) {
+//                    //console.log(text);
+//                   document.getElementById("divId").innerHTML = text ;
+//                    
+//                });
+//            }, 3000);
+        </script>
+    </body>
+</html>
